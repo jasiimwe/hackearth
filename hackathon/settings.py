@@ -11,21 +11,32 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from pickle import FALSE
+import dotenv
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+dotenv.read_dotenv(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-jh)!)b@#+$3gtqd18qh!&lzt+3)9@58pngsrl2k)t5(g!ff@3h'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+DEBUG = str(os.environ.get('DEBUG')) == '1'
+
+if not DEBUG:
+    ALLOWED_HOSTS =[os.environ.get('ALLOWED_HOST')]
+    print(ALLOWED_HOSTS)
+    
+else:
+    ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -41,6 +52,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'profiles',
     'events',
+    'organization',
 ]
 
 MIDDLEWARE = [
@@ -87,12 +99,28 @@ WSGI_APPLICATION = 'hackathon.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+
+if not DEBUG: 
+      DATABASES = {
+      'default':{
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS':{
+            'read_default_file': '/etc/mysql/my.cnf',
+           },
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'USER': os.environ.get('USERNAME'),
+        'PASSWORD': os.environ.get('PASSWORD'),
+        'HOST': '127.0.0.1',
+        'PORT': '3306'
+         }
+      }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
 
 
 # Password validation
