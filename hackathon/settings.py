@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'authenticate',
     'rest_framework',
     'profiles',
+    'events',
 ]
 
 MIDDLEWARE = [

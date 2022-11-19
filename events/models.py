@@ -1,4 +1,4 @@
-from operator import mod
+
 from django.db import models
 from core.models import TimestampedModel
 
@@ -8,4 +8,8 @@ class Events(TimestampedModel):
     event_name = models.CharField(max_length=100)
     event_description = models.TextField(max_length=200)
     event_media = models.URLField()
-    
+
+    def __str__(self):
+        return self.event_name
+
+
