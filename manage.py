@@ -2,12 +2,12 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-import dotenv
+# import dotenv
 
 def main():
     """Run administrative tasks."""
-    if os.environ.get('DEBUG'):
-        dotenv.read_dotenv()
+#     if os.environ.get('DEBUG'):
+#         dotenv.read_dotenv()
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hackathon.settings')
     try:
         from django.core.management import execute_from_command_line
