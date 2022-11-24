@@ -11,6 +11,11 @@ class Organization(TimestampedModel):
     organization_name = models.CharField(max_length=100)
     organization_description = models.TextField()
     contact = models.CharField(max_length=15)
+    email = models.EmailField()
+    city = models.CharField(max_length=200)
+    zip = models.CharField(max_length=200)
+    location = models.CharField(max_length=200)
+
 
     def __str__(self):
         return self.organization_name

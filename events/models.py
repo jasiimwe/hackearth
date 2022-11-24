@@ -10,6 +10,7 @@ class Events(TimestampedModel):
     event_description = models.TextField(max_length=200)
     event_media = models.CharField(max_length=1000)
     amount_to_raise = models.CharField(max_length=100)
+    
 
     def __str__(self):
         return self.event_name
