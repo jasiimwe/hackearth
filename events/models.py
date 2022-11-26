@@ -11,7 +11,8 @@ class Events(TimestampedModel):
     event_name = models.CharField(max_length=100)
     event_description = models.TextField(max_length=200)
     event_media = models.CharField(max_length=1000)
-    amount_to_raise = models.CharField(max_length=100)
+    event_amount = models.CharField(max_length=100)
+    amount_donated = models.CharField(max_length=100, null=True, blank=True)
     
 
     def __str__(self):
