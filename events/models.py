@@ -1,10 +1,12 @@
 
+import uuid
 from django.db import models
 from core.models import TimestampedModel
 from organization.models import Organization
 
 # Create your models here.
 class Events(TimestampedModel):
+    event_id = models.UUIDField(default=uuid.uuid4, editable=False)
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, blank=True, null=True)
     event_name = models.CharField(max_length=100)
     event_description = models.TextField(max_length=200)
