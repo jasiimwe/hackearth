@@ -22,4 +22,5 @@ urlpatterns = [
     path('api/', include('profiles.urls', namespace='profiles')),
     path('api/', include('events.urls', namespace='events')),
     path('api/', include('organization.urls', namespace='organization')),
+    path('api/', include('transactions.urls', namespace='transactions')),
 ]

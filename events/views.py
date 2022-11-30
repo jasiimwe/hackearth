@@ -1,8 +1,3 @@
-from asyncio import events, run_coroutine_threadsafe
-from http import server
-from nis import cat
-import re
-from webbrowser import get
 from rest_framework import status
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
