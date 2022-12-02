@@ -19,7 +19,7 @@ def get_all_transactions(request):
         return Response(serializer_data, status = status.HTTP_200_OK)
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([AllowAny])
 def create_transaction(request):
     if request.methd == "POST":
