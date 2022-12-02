@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import *
+from .views import create_transaction
 
 app_name = 'transactions'
 urlpatterns = [
