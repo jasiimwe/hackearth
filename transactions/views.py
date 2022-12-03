@@ -11,7 +11,7 @@ from .serializer import TransactionSerializer
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def get_all_transactions(request):
-    if request.methd == "GET":
+    if request.method == "GET":
         all_transactions = Transactions.objects.all()
         if not all_transactions:
             return Response({"error":"Transactions don't exist"}, status = status.HTTP_404_NOT_FOUND)
@@ -19,11 +19,11 @@ def get_all_transactions(request):
         return Response(serializer_data, status = status.HTTP_200_OK)
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([AllowAny])
 def create_transaction(request):
-    if request.methd == "POST":
-        serializer_data = TransactionSerializer(request.data)
+    if request.method == "POST":
+        serializer_data = TransactionSerializer(data=request.data)
         if serializer_data.is_valid():
             serializer_data.save()
             return Response(serializer_data, status = status.HTTP_201_CREATED)

@@ -4,7 +4,7 @@ from core.models import TimestampedModel
 import uuid
 
 class Transactions(TimestampedModel):
-    event_id = models.ForeignKey(Events, on_delete=models.CASCADE, blank=True, null=True)
+    event_id = models.CharField(max_length=225)
     transaction_uid = models.UUIDField(default=uuid.uuid4, editable=False)
     transaction_amount = models.IntegerField(blank=True, null=True)
     original_amount = models.IntegerField(blank=True, null=True)
