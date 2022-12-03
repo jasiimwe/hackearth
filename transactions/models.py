@@ -6,6 +6,8 @@ import uuid
 class Transactions(TimestampedModel):
     event_id = models.CharField(max_length=225)
     transaction_uid = models.UUIDField(default=uuid.uuid4, editable=False)
+    payment_id = models.CharField(max_length=225, null=True)
+    organisation_id = models.IntegerField(max_length=225, null=True)
     transaction_amount = models.IntegerField(blank=True, null=True)
     original_amount = models.IntegerField(blank=True, null=True)
     is_partial = models.BooleanField(default=False)
