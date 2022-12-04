@@ -36,7 +36,7 @@ if not DEBUG:
     print(ALLOWED_HOSTS)
     
 else:
-    ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOST')]
+    ALLOWED_HOSTS = []
 
 
 # Application definition
