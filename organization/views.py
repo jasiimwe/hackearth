@@ -56,6 +56,19 @@ def get_organization(request, pk):
             serializer = OrganizationSerializer(get_organization)
             return Response(serializer.data)
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_organization_user(request, user_id):
+    if request.method == "GET":
+        get_organization = Organization.objects.filter(user = user_id)
+        if not get_organization:
+            return Response({"error":"Organization doesn't exist"}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            serializer = OrganizationSerializer(get_organization, many=True)
+            return Response(serializer.data)
+
+
+
 @api_view(['PUT'])
 @permission_classes([AllowAny])
 def update_organization(request, pk):

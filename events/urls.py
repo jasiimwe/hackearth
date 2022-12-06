@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import CreateEventsAPIView, all_events, get_events_view, update_event, delete_event
+from .views import CreateEventsAPIView, all_events, get_events_view, update_event, delete_event, get_events_organization
 
 app_name = 'events'
 urlpatterns = [
@@ -9,4 +9,5 @@ urlpatterns = [
     path('all_events/', all_events),
     path('update_event/<pk>/', update_event),
     path('delete_event/<pk>/', delete_event),
+    path('get_events_organization/<int:organization_id>/', get_events_organization)
 ]

@@ -18,6 +18,17 @@ def get_all_transactions(request):
         serializer_data = TransactionSerializer(all_transactions, many=True)
         return Response(serializer_data, status = status.HTTP_200_OK)
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_all_transactions_event(request, event_uid):
+    if request.method == "GET":
+        all_transactions = Transactions.objects.filter(event_uid=event_uid)
+        if not all_transactions:
+            return Response({"error":"Transactions don't exist"}, status = status.HTTP_404_NOT_FOUND)
+        serializer_data = TransactionSerializer(all_transactions, many=True)
+        return Response(serializer_data, status = status.HTTP_200_OK)
+
+
 
 @api_view(['POST'])
 @permission_classes([AllowAny])

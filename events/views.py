@@ -38,6 +38,17 @@ def get_events_view(request, event_name):
         except Events.DoesNotExist:
             return Response({"error":"Event Name doesn't exist"}, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_events_organization(request, organization_id):
+    if request.method == "GET":
+        try:
+            events = Events.objects.filter(organization=organization_id)
+            serializer = EventSerializers(events, many=True)
+            return Response(serializer.data)
+        except Events.DoesNotExist:
+            return Response({"error":"Event Name doesn't exist"}, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
