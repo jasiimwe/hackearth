@@ -52,19 +52,31 @@ def get_events_organization(request, organization_id):
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
+def get_events_category(request, category_id):
+    if request.method == "GET":
+        try:
+            events = Events.objects.filter(category=category_id)
+            serializer = EventSerializers(events, many=True)
+            return Response(serializer.data)
+        except Events.DoesNotExist:
+            return Response({"error":"Event Name doesn't exist"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def all_events(request):
     get_events= Events.objects.all()
     serializers = EventSerializers(get_events, many=True)
     return Response(serializers.data)
 
 
-@api_view(['PUT'])
+@api_view(['PATCH'])
 @permission_classes([AllowAny])
 def update_event(request, pk):
-    if request.method == "PUT":
+    if request.method == "PATCH":
         data = request.data
         get_event = Events.objects.filter(pk=pk).first()
-        serializer = EventSerializers(get_event, data=data)
+        serializer = EventSerializers(get_event, data=data, partial=True)
         if serializer.is_valid():
             #s = serializer.save(commit=True)
             #s.user = request.user
