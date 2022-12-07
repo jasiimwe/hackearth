@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import CreateEventsAPIView, all_events, get_events_view, update_event, delete_event, get_events_organization
+from .views import *
 
 app_name = 'events'
 urlpatterns = [
@@ -9,5 +9,13 @@ urlpatterns = [
     path('all_events/', all_events),
     path('update_event/<pk>/', update_event),
     path('delete_event/<pk>/', delete_event),
-    path('get_events_organization/<int:organization_id>/', get_events_organization)
+    path('get_events_organization/<int:organization_id>/', get_events_organization),
+
+    path('create_category/', create_category),
+    path('update_category/<str:uid>/', update_category),
+    path('get_category/<str:uid>/', get_category),
+    path('all_categories/', all_category),
+    path('delete_category/<str:uid>/', delete_category),
+
+
 ]
